@@ -1,5 +1,5 @@
  
-
+//........................... creation ......................................
  async function  clubCreateHandler(event){
   try{
     event.preventDefault();
@@ -31,6 +31,8 @@
  }
 
 
+
+ //.................. reading................................
 
  async function getClub(){
   try{
@@ -79,32 +81,35 @@
 
  }
 
-function updateClub(id){
-  localStorage.setItem('clubId', id);
-  window.location.href = 'updateClub.html';
-}
-
-
-
+ 
+ 
+ //...................deletion..................................
  async function deleteClub(id){
-  try{
-    console.log(id)
-      const response = await fetch(`http://localhost:4000/api/v1/deleteClub/${id}`,{
-          method: 'DELETE'
-        })
-
-        const data = await response.json();
-        
-        console.log(data)
-
-        window.location.reload();
-  }catch(error){
-    console.log('failed to delete club',error)
+   try{
+     console.log(id)
+     const response = await fetch(`http://localhost:4000/api/v1/deleteClub/${id}`,{
+       method: 'DELETE'
+      })
+      
+      const data = await response.json();
+      
+      console.log(data)
+      
+      window.location.reload();
+    }catch(error){
+      console.log('failed to delete club',error)
+    }
   }
- }
 
 
 
+  //..........................updation................................
+  function updateClub(id){
+    localStorage.setItem('clubId', id);
+    window.location.href = 'updateClub.html';
+  }
+  
+  
  async function updateHandler(event){
   try{
     event.preventDefault()
