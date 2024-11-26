@@ -64,6 +64,7 @@
         <p>Description : ${data.description}</p>
         <p>Venue : ${data.venue}</p>
         <button onclick="deleteClub('${data._id}')">Delete</button>
+        <button onclick="updateClub('${data._id}')">Update</button>
     
       `
 
@@ -77,6 +78,13 @@
 
 
  }
+
+function updateClub(id){
+  localStorage.setItem('clubId', id);
+  window.location.href = 'updateClub.html';
+}
+
+
 
  async function deleteClub(id){
   try{
@@ -96,5 +104,32 @@
  }
 
 
+
+ async function updateHandler(event){
+  try{
+    event.preventDefault()
+    const id = localStorage.getItem('clubId')
+
+    const formData = new FormData(event.target)
+
+    console.log('dd')
+
+
+
+    const response  = await fetch(`http://localhost:4000/api/v1/updateClub/${id}`,{
+      method:'PUT',
+      body: formData
+    })
+
+    const data = await response.json();
+    console.log('response',data);
+
+    window.location.href = 'index.html';
+    localStorage.clear('clubId')
+
+  }catch(error){
+    console.error('Error in updating club:', error.message);
+  }
+ }
  
       
